@@ -1,0 +1,106 @@
+    def to_roman(val):
+        print("Value: ", val)
+    
+        letter = ""
+        number_m = int(0)
+        number_cm = int(0)
+        number_d = int(0)
+        number_cd = int(0)
+        number_c = int(0)
+        number_xc = int(0)
+        number_l = int(0)
+        number_xl = int(0)
+        number_x = int(0)
+        number_remain = int(0)
+
+        # -- M (1000) --
+        number_m = int(val / 1000) 
+        if number_m >= 1:
+            for x in range(number_m):
+                letter += "M"
+        else:  
+            number_m = 0
+
+        # CM (900)
+        number_cm = (val / 1000) - (number_m)
+        if number_cm > 0.899 and number_cm <= 1:
+            letter += "CM"
+        else:  
+            number_cm = 0
+
+        # D (500)
+        number_d = (val / 500) - number_m*2 - (round(number_cm)*1.8)
+        if number_d >= 1:
+            for x in range(int(number_d)):
+                letter += "D"
+        else:  
+            number_d = 0
+        number_d = int((number_d))
+
+        # CD (400)
+        number_cd = (val / 500) - number_m*2 - (round(number_cm)*1.8)
+        if number_cd > 0.79999 and number_cd <= 1:
+            letter += "CD"
+        else:
+            number_cd = 0
+        #number_cd = int((number_cd))
+
+
+        # -- C (100) --
+        number_c = (val / 100) - (number_m*10) - (round(number_cm)*9) - (number_d*5) - (round(number_cd)*4)
+        if number_c >= 1:
+            for x in range(int(number_c)):
+                letter += "C"
+        else:
+            number_c = 0  
+        number_c = int((number_c))
+
+        # XC (90)
+        number_xc = (val / 100) - (number_m*10) - (round(number_cm)*9) - (number_d*5) - (round(number_cd)*4) - number_c
+        if number_xc > 0.899999 and number_xc <= 1:
+            letter += "XC"
+        else:
+            number_xc = 0
+        #number_xc = int((number_xc))
+
+        # L (50)
+        number_l = (val / 50) - (number_m*20) - (round(number_cm)*18) - (number_d*10) - (round(number_cd)*8) - (number_c*2) - (round(number_xc)*1.8)
+        if number_l >= 1:
+            for x in range(int(number_l)):
+                letter += "L"
+        else:
+            number_l = 0
+        number_l = int(number_l)
+
+        # XL (40)
+        number_xl = (val / 50) - (number_m*20) - (round(number_cm)*18) - (number_d*10) - (round(number_cd)*8) - (number_c*2) - (round(number_xc)*1.8) - number_l
+        if number_xl >= 0.799999 and number_xl <= 1:
+            letter += "XL"
+        else:
+            number_xl = 0
+
+        # -- X (10) --
+        number_x = (val / 10) - (number_m*100) - (round(number_cm)*90) - (number_d*50) - (round(number_cd)*40) - (number_c*10) - (round(number_xc)*9)- (number_l*5) - (round(number_xl)*4) 
+        for x in range(int(number_x)):
+            letter += "X"
+
+        # Below 10    
+        number_remain = val % 10
+        switcher={
+            9:"IX",
+            8:"VIII",
+            7:"VII",
+            6:"VI",
+            5:"V",
+            4:"IV",
+            3:"III",
+            2:"II",
+            1:"I"
+        }
+
+        if number_remain > 0 and number_remain < 10:
+            letter += switcher.get(number_remain, "nope")
+
+        print("Result", letter)
+        print("===========")
+        return letter
