@@ -60,7 +60,7 @@ class RomanNumerals:
 
             # CD (400)
             number_cd = (val / 500) - number_m*2 - (round(number_cm)*1.8)
-            if number_cd > 0.79999 and number_cd < 1:
+            if number_cd > 0.79999 and number_cd <= 1:
                 letter += "CD"
             else:
                 number_cd = 0
